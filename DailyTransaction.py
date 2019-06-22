@@ -10,6 +10,7 @@ class Transaction:
         self.income = income
         self.collector = collector
 
+
     def get(self):
         return {
             "Date" : self.date,
