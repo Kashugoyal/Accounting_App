@@ -22,7 +22,7 @@ class MasterAccount:
     #     self.users.pop(user_id, None)
 
     def get_users(self):
-        return [(user.id, user.name) for user in self.users.values()]
+        return [(user.user_id, user.name) for user in self.users.values()]
 
     # def add_transaction(self, date, expenses, income, collector):
     #     for key in income.keys():

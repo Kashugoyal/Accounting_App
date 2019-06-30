@@ -4,12 +4,24 @@ from User import User
 from UserAccount import UserAccount
 from MasterAccount import MasterAccount
 from db_handler import read_data, write_data
+from unittest import TestCase as TC
 
 app = Flask(__name__)
 api = Api(app)
 
 account = read_data("akansal")
-write_data(account)
+# write_data(account)
+
+
+# account methods
+@app.route('/write', methods = ['POST'])
+def write_data_to_file():
+    write_data(account)
+    response_object = {'status': 'success'}
+    response_object['file_name'] = account.name + ".json"
+    return jsonify(response_object)
+
+
 # user methods
 
 @app.route('/add_user', methods = ['POST'])
@@ -19,7 +31,7 @@ def add_user():
     return jsonify(response_object)
 
 
-@app.route('/user/<id>/add_account')
+@app.route('/user/<id>/add_account', methods = ['POST'])
 def add_account(id: str):
     account_id = None
     account_id = account.users[id].add_account(**request.args.to_dict())
@@ -44,7 +56,7 @@ def get_info(id: str):
 
 @app.route('/user/<id>/get_accounts', methods = ['GET'])
 def get_accounts(id: str):
-    return jsonify(account.users[id].accounts.keys())
+    return jsonify(list(account.users[id].accounts.keys()))
 
 
 @app.route('/user/<id>/remove', methods = ['POST'])
@@ -75,3 +87,18 @@ def add_user_payment(user_id: str, account_id: str):
 @app.route('/get_users', methods = ['GET'])
 def get_user_list():
     return jsonify(account.get_users())
+
+
+# class TestCase(TC):
+
+#     def setUp(self):
+#         app.config['TESTING'] = True
+#         app.config['WTF_CSRF_ENABLED'] = False
+#         app.config['DEBUG'] = False
+#         self.app = app.test_client()
+    
+#     def tearDown(self):
+#         pass
+    
+#     def test
+        

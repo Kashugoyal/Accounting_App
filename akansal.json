@@ -1,101 +1,105 @@
 {
-    "name": "akansal",
-    "user_array": [],
     "users": {
         "usr123": {
-            "remarks": "333 #### 3333",
+            "name": "Kashish",
             "accounts": {
                 "acc1231": {
-                    "installment": 39360.0,
-                    "freq": 15,
+                    "loan_amount": 1968000.0,
                     "principal": 12300.0,
-                    "duration": 25.0,
-                    "balance": 1960000.0,
+                    "rate": 3.0,
+                    "freq": 15,
                     "payments": {
                         "2012-04-27": 4000,
-                        "2012-04-25": 2000,
-                        "2012-04-23": 2000
+                        "2012-04-23": 2000,
+                        "2012-04-25": 2000
                     },
-                    "rate": 3.0,
                     "start_date": "2012-04-23",
-                    "loan_amount": 1968000.0,
-                    "account_id": "acc0630021429594987"
+                    "installment": 39360.0,
+                    "duration": 25.0,
+                    "account_id": "acc1231",
+                    "balance": 1960000.0
                 }
             },
             "address": "#623 SST Nagar Patiala",
-            "phone_number": "9478280310",
-            "name": "Kashish",
+            "remarks": "333 #### 3333",
             "reference": "Bla",
-            "user_id": "usr0630021429594521"
+            "user_id": "usr123",
+            "phone_number": "9478280310"
         },
         "usr125": {
-            "remarks": "33sadf3 #### 3333",
+            "name": "Ram",
             "accounts": {
                 "acc1251": {
-                    "installment": 39360.0,
-                    "freq": 15,
+                    "loan_amount": 1968000.0,
                     "principal": 12300.0,
-                    "duration": 25,
-                    "balance": 1960000.0,
+                    "rate": 3.0,
+                    "freq": 15,
                     "payments": {
                         "2012-04-27": 4000,
-                        "2012-04-25": 2000,
-                        "2012-04-23": 2000
+                        "2012-04-23": 2000,
+                        "2012-04-25": 2000
                     },
-                    "rate": 3.0,
                     "start_date": "2012-04-23",
-                    "loan_amount": 1968000.0,
-                    "account_id": "acc0630021429596414"
+                    "installment": 39360.0,
+                    "duration": 25,
+                    "account_id": "acc1251",
+                    "balance": 1960000.0
                 }
             },
             "address": "#131 adf Nagar Patiala",
-            "phone_number": "9478280567",
-            "name": "Ram",
+            "remarks": "33sadf3 #### 3333",
             "reference": "Alb",
-            "user_id": "usr0630021429596277"
+            "user_id": "usr125",
+            "phone_number": "9478280567"
         },
-        "usr124": {
-            "remarks": "333dsgs #### 3333",
+        "usr001Arun": {
+            "name": "Arun",
             "accounts": {
-                "acc1242": {
-                    "installment": 81655.0,
-                    "freq": 1,
-                    "principal": 23330.0,
-                    "duration": 20,
-                    "balance": 48985000.0,
-                    "payments": {
-                        "2016-06-27": 4000,
-                        "2016-06-25": 2000,
-                        "2016-06-23": 2000
-                    },
-                    "rate": 3.5,
-                    "start_date": "2016-05-23",
-                    "loan_amount": 48993000.0,
-                    "account_id": "acc0630021429597854"
-                },
                 "acc1241": {
-                    "installment": 43400.0,
-                    "freq": 1,
+                    "loan_amount": 26040000.0,
                     "principal": 12400.0,
-                    "duration": 20,
-                    "balance": 26032000.0,
+                    "rate": 3.5,
+                    "freq": 1,
                     "payments": {
                         "2016-06-27": 4000,
-                        "2016-06-25": 2000,
-                        "2016-06-23": 2000
+                        "2016-06-23": 2000,
+                        "2016-06-25": 2000
                     },
-                    "rate": 3.5,
                     "start_date": "2016-05-23",
-                    "loan_amount": 26040000.0,
-                    "account_id": "acc0630021429600021"
+                    "installment": 43400.0,
+                    "duration": 20,
+                    "account_id": "acc1241",
+                    "balance": 26032000.0
+                },
+                "acc1242": {
+                    "loan_amount": 48993000.0,
+                    "principal": 23330.0,
+                    "rate": 3.5,
+                    "freq": 1,
+                    "payments": {
+                        "2016-06-27": 4000,
+                        "2016-06-23": 2000,
+                        "2016-06-25": 2000
+                    },
+                    "start_date": "2016-05-23",
+                    "installment": 81655.0,
+                    "duration": 20,
+                    "account_id": "acc1242",
+                    "balance": 48985000.0
                 }
             },
             "address": "#dasfad Patiala",
-            "phone_number": "9478223425",
-            "name": "Arun",
+            "remarks": "333dsgs #### 3333",
             "reference": "Bla Bla",
-            "user_id": "usr0630021429597700"
+            "user_id": "usr001Arun",
+            "phone_number": "9478223425"
         }
     },
-    "loaned_sum": 1500
+    "loaned_sum": 1500,
+    "name": "akansal",
+    "user_array": [
+        "usr0630084755287319",
+        "usr181160557",
+        "usr0004"
+    ]
 }

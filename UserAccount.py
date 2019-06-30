@@ -19,12 +19,12 @@ class UserAccount:
     @classmethod
     def get_id(cls):
         cls.num_accounts += 1
-        return 'acc' + datetime.datetime.now().strftime('%m%d%H%M%S%f')
+        return 'acc' + datetime.datetime.now().strftime('%j%H%M%S%f')
 
 
     def __init__(self, **kwargs):
 
-        self.account_id = UserAccount.get_id()
+        self.account_id = kwargs.get('account_id', UserAccount.get_id())
         # in Rs
         self.principal = kwargs.get("principal", None)
         self.start_date = kwargs.get("start_date", datetime.date.today())
@@ -53,7 +53,7 @@ class UserAccount:
         t = 30/self.freq
         self.installment = (self.principal * rate * pow(1 + rate, t)) / (pow(1 + rate, t) - 1)
         self.loan_amount = self.installment*self.duration*30/self.freq
-        logging.warn("UserAccount installment updated to Rs:{0} {1}".format(self.installment, UserAccount.frequency[self.freq]))
+        logging.warn("UserAccount {2} installment updated to Rs:{0} {1}".format(self.installment, UserAccount.frequency[self.freq], self.account_id))
 
 
     def calculate_balance(self):
@@ -78,11 +78,12 @@ class UserAccount:
             "installment": self.installment,
             "duration": self.duration,
             "loan_amount": self.loan_amount,
-            "freq": self.freq }
+            "freq": self.freq,
+            "payments": self.payments }
 
 
     def add_payment(self, value, date=datetime.date.today()):
-        self.payments[date] = value
+        self.payments[date] = float(value)
         self.calculate_balance()
         return True
         

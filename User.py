@@ -1,24 +1,25 @@
 import logging
 from UserAccount import UserAccount
 import datetime
+import uuid
 
 class User:
 
     num_users = 0
 
     @classmethod
-    def get_id(cls):
+    def get_id(cls, name: str):
         cls.num_users += 1
-        return 'usr' + datetime.datetime.now().strftime('%m%d%H%M%S%f')
+        return 'usr{:04d}{}'.format(cls.num_users, name)
 
     def __init__(self, **kwargs):
         
-        self.user_id = User.get_id()
         try:
             self.name = kwargs.get('name')
         except KeyError:
             logging.error("Invalid Name for the user. Try again.")
             return
+        self.user_id = kwargs.get('user_id', User.get_id(self.name))
         self.phone_number = kwargs.get('phone_number', '')
         self.address = kwargs.get('address', '')
         self.reference = kwargs.get('reference', '')
@@ -33,7 +34,7 @@ class User:
         except KeyError:
             logging.error("Principal value not given. Could not add the account.")
             return None
-        account =  UserAccount(principal, **kwargs)
+        account =  UserAccount(**kwargs)
         self.accounts[account.account_id] = account
         logging.info("Account id: {0} added to user_id: {1}".format(account.account_id, self.user_id))
         return account.account_id
