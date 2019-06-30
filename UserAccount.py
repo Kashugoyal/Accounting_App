@@ -14,7 +14,7 @@ class UserAccount:
     rate = 3.5
 
     num_accounts = 0
-    default_duration = 6
+    default_duration = 6.0
 
     @classmethod
     def get_id(cls):
@@ -22,32 +22,29 @@ class UserAccount:
         return 'acc' + datetime.datetime.now().strftime('%m%d%H%M%S%f')
 
 
-    def __init__(self,
-                 principal: float,
-                 start_date=datetime.date.today(),
-                 rate: float=rate,
-                 balance :float=None, 
-                 installment :float=None, 
-                 duration :float=default_duration, 
-                 freq: int=1):
+    def __init__(self, **kwargs):
 
         self.account_id = UserAccount.get_id()
         # in Rs
-        self.principal = principal
-        self.start_date = start_date
+        self.principal = kwargs.get("principal", None)
+        self.start_date = kwargs.get("start_date", datetime.date.today())
         # interest per month
-        self.rate = rate
+        self.rate = kwargs.get("rate", UserAccount.rate)
         # in Rs
-        self.balance = balance
+        self.balance = kwargs.get("balance", None, )
         # in Rs
-        self.installment = installment
+        self.installment = kwargs.get("installment", None, )
         # time period in months
-        self.duration = duration
+        self.duration = kwargs.get("duration",  UserAccount.default_duration)
         # payment frequency - once a month, twice a month etc.
-        self.freq = freq
+        self.freq = kwargs.get("freq", 1)
+
         # principal + interest
-        self.loan_amount = None
+        self.loan_amount = kwargs.get("loan_amount", None)
+
         self.payments = {}
+        self.calculate_installment()
+        self.calculate_balance()
         logging.info("Created new UserAccount with principal Rs: {0}".format(self.principal))
 
 
@@ -60,7 +57,7 @@ class UserAccount:
 
 
     def calculate_balance(self):
-        self.balance = self.loan_amount - sum(self.payments.keys())
+        self.balance = self.loan_amount - sum(self.payments.values())
 
 
     def update_account(self, **kwargs):
@@ -73,7 +70,7 @@ class UserAccount:
         return True
 
 
-    def get_account(self):
+    def get_details(self):
         return {
             "principal": self.principal,
             "start_date": self.start_date,
@@ -87,4 +84,5 @@ class UserAccount:
     def add_payment(self, value, date=datetime.date.today()):
         self.payments[date] = value
         self.calculate_balance()
+        return True
         

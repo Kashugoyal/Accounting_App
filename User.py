@@ -15,21 +15,21 @@ class User:
         
         self.user_id = User.get_id()
         try:
-            self.name = kwargs.get('Name')
+            self.name = kwargs.get('name')
         except KeyError:
             logging.error("Invalid Name for the user. Try again.")
             return
-        self.phone_number = kwargs.get('PhoneNumber', None)
-        self.address = kwargs.get('Address', '')
-        self.reference = kwargs.get('Reference', '')
-        self.remarks = ''
+        self.phone_number = kwargs.get('phone_number', '')
+        self.address = kwargs.get('address', '')
+        self.reference = kwargs.get('reference', '')
+        self.remarks = kwargs.get('remarks', '')
         self.accounts = {}
         logging.info("User created with name: {} and id: {}".format(self.name, self.user_id))
 
     def add_account(self, **kwargs):
 
         try:
-            principal = kwargs.get('Principal')
+            principal = kwargs.get('principal')
         except KeyError:
             logging.error("Principal value not given. Could not add the account.")
             return None
@@ -40,19 +40,20 @@ class User:
 
     def update_info(self, **kwargs):
         
-        self.name = kwargs.get('Name', '')
-        self.phone_number = kwargs.get('Phone_number', '')
-        self.address = kwargs.get('Address', '')
-        self.reference = kwargs.get('Reference', '')
+        self.name = kwargs.get('name', '')
+        self.phone_number = kwargs.get('phone_number', '')
+        self.address = kwargs.get('address', '')
+        self.reference = kwargs.get('reference', '')
         logging.warn("Info Updated for user: {0}".format(self.name))
         return True
 
     def get_info(self):
         logging.debug("Get info request received for user: {0}".format(self.name))        
-        return {"Name": self.name, 
-                "Phone Number": self.phone_number, 
-                "Address": self.address, 
-                "Reference": self.reference}
+        return {"name": self.name, 
+                "phone Number": self.phone_number, 
+                "address": self.address, 
+                "reference": self.reference,
+                "remarks": self.remarks}
     
     def get_accounts(self):
         return self.accounts.keys()

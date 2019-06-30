@@ -3,12 +3,13 @@ from flask_restful import Api, Resource, reqparse
 from User import User
 from UserAccount import UserAccount
 from MasterAccount import MasterAccount
+from db_handler import read_data, write_data
 
 app = Flask(__name__)
 api = Api(app)
 
-account = MasterAccount()
-
+account = read_data("akansal")
+write_data(account)
 # user methods
 
 @app.route('/add_user', methods = ['POST'])
@@ -18,23 +19,55 @@ def add_user():
     return jsonify(response_object)
 
 
-@app.route('/user/<id>/update', methods = ['POST'])
-def update_user(id):
-    account.users[id].update(**request.args.to_dict())
-    response_object = {'status': 'success'}
+@app.route('/user/<id>/add_account')
+def add_account(id: str):
+    account_id = None
+    account_id = account.users[id].add_account(**request.args.to_dict())
+    status = 'success' if account_id else 'failed'
+    response_object = {'status': status, 'account_id': account_id}
     return jsonify(response_object)
 
 
-@app.route('/user/<id>/remove')
-def remove_user(id):
+@app.route('/user/<id>/update', methods = ['POST'])
+def update_user(id: str):
+    retVal = False
+    retVal = account.users[id].update_info(**request.args.to_dict())
+    status = 'success' if retVal else 'failed'
+    response_object = {'status': status}
+    return jsonify(response_object)
+
+
+@app.route('/user/<id>/get', methods = ['GET'])
+def get_info(id: str):
+    return jsonify(account.users[id].get_info())
+
+
+@app.route('/user/<id>/get_accounts', methods = ['GET'])
+def get_accounts(id: str):
+    return jsonify(account.users[id].accounts.keys())
+
+
+@app.route('/user/<id>/remove', methods = ['POST'])
+def remove_user(id: str):
     del account.users[id]
     response_object = {'status': 'success'}
     return jsonify(response_object)
 
 
-@app.route('/user/<id>/add_account')
-def add_user_account(id):
-    account.users[id].add_account(**request.args.to_dict())
+#user account methods
+
+@app.route('/user/<user_id>/<account_id>/get', methods = ['GET'])
+def get_user_account(user_id: str, account_id: str):
+    return jsonify(account.users[user_id].accounts[account_id].get_details())
+
+
+@app.route('/user/<user_id>/<account_id>/add_payment', methods = ['POST'])
+def add_user_payment(user_id: str, account_id: str):
+    retVal = False
+    retVal = account.users[user_id].accounts[account_id].add_payment(**request.args.to_dict())
+    status = 'success' if retVal else 'failed'
+    response_object = {'status': status}
+    return jsonify(response_object)
 
 
 # account methods

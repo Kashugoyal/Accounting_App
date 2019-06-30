@@ -5,9 +5,10 @@ from User import User
 
 class MasterAccount:
 
-    def __init__(self):
-        self.user_array = []
-        self.loaned_sum = None
+    def __init__(self, **kwargs):
+        self.name = kwargs.get("name", '')
+        self.user_array = kwargs.get("user_array", [])
+        self.loaned_sum = kwargs.get("loaned_sum", None)
         # self.transactions = {}
         self.users = {}
 
