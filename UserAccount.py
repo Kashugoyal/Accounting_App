@@ -26,21 +26,21 @@ class UserAccount:
 
         self.account_id = kwargs.get('account_id', UserAccount.get_id())
         # in Rs
-        self.principal = kwargs.get("principal", None)
-        self.start_date = kwargs.get("start_date", datetime.date.today())
+        self.principal = float(kwargs.get("principal", 0))
+        self.start_date = kwargs.get("start_date", f"{datetime.datetime.now():%Y-%m-%d}")
         # interest per month
-        self.rate = kwargs.get("rate", UserAccount.rate)
+        self.rate = float(kwargs.get("rate", UserAccount.rate))
         # in Rs
-        self.balance = kwargs.get("balance", None, )
+        self.balance = float(kwargs.get("balance", 0))
         # in Rs
-        self.installment = kwargs.get("installment", None, )
+        self.installment = float(kwargs.get("installment", 0))
         # time period in months
-        self.duration = kwargs.get("duration",  UserAccount.default_duration)
+        self.duration = float(kwargs.get("duration",  UserAccount.default_duration))
         # payment frequency - once a month, twice a month etc.
-        self.freq = kwargs.get("freq", 1)
+        self.freq = int(kwargs.get("freq", 1))
 
         # principal + interest
-        self.loan_amount = kwargs.get("loan_amount", None)
+        self.loan_amount = float(kwargs.get("loan_amount", 0))
 
         self.payments = {}
         self.calculate_installment()
@@ -50,8 +50,9 @@ class UserAccount:
 
     def calculate_installment(self):
         rate = self.rate
-        t = 30/self.freq
-        self.installment = (self.principal * rate * pow(1 + rate, t)) / (pow(1 + rate, t) - 1)
+        t = self.duration
+        installment = (self.principal * rate * pow(1 + rate, t)) / (pow(1 + rate, t) - 1)
+        self.installment = installment*self.freq/30
         self.loan_amount = self.installment*self.duration*30/self.freq
         logging.warn("UserAccount {2} installment updated to Rs:{0} {1}".format(self.installment, UserAccount.frequency[self.freq], self.account_id))
 
@@ -77,6 +78,7 @@ class UserAccount:
             "balance": self.balance,
             "installment": self.installment,
             "duration": self.duration,
+            "rate": self.rate,
             "loan_amount": self.loan_amount,
             "freq": self.freq,
             "payments": self.payments }
