@@ -1,0 +1,9 @@
+<mat-toolbar class="top" color="primary">
+  <span>iLedger</span>
+</mat-toolbar>
+
+<router-outlet *ngIf="isAuthenticated()"></router-outlet>
+
+<app-login *ngIf="!isAuthenticated()"></app-login>
+
+<mat-toolbar class="bottom"></mat-toolbar>
