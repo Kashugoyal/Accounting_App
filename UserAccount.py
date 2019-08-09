@@ -27,7 +27,7 @@ class UserAccount:
         self.account_id = kwargs.get('account_id', UserAccount.get_id())
         # in Rs
         self.principal = float(kwargs.get("principal", 0))
-        self.start_date = kwargs.get("start_date", f"{datetime.datetime.now():%Y-%m-%d}")
+        self.start_date = kwargs.get("start_date", "{:%Y-%m-%d}".format(datetime.datetime.now()))
         # interest per month
         self.rate = float(kwargs.get("rate", UserAccount.rate))
         # in Rs

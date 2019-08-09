@@ -9,7 +9,7 @@ export class LoginService {
 
   private username: string = 'alkeshkansal';
   private password: string = 'password';
-  private isAuthorized = false;
+  private isAuthorized = true;
 
   login(username:string, password:string)
   {
