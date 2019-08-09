@@ -1,3 +1,4 @@
+import { LoginService } from './../login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
@@ -10,7 +11,7 @@ import { Router } from '@angular/router'
 
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private loginService: LoginService) { }
 
   ngOnInit() {
   }
@@ -22,10 +23,12 @@ export class LoginComponent implements OnInit {
 
   login() : void 
   {
-    if(this.username == 'admin' && this.password == 'admin'){
-      this.isLoggedIn = true;
-      this.router.navigate([""]);
-    }else {
+    this.loginService.login(this.username, this.password);
+    if(this.loginService.isAuthenticated())
+    {
+      this.router.navigate[""];
+    }
+    else {
       alert("Invalid credentials");
     }
   }

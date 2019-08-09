@@ -1,9 +1,11 @@
+<div class="row">
+    <div class="element"> <span> Login</span>
 <mat-card class="login-card">
-    <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
+    <div id="header">
+        <mat-card-title>Enter your details</mat-card-title>
+    </div>
     <mat-card-content>
-        <ng-form class="login-form">
+        <form #f="ngForm" (ngSubmit)="login()" novalidate>
             <table class="" cellspacing="0">
                 <tr>
                     <td>
@@ -21,10 +23,11 @@
                     </td>
                 </tr>
             </table>
-        </ng-form>
+            <button mat-raised-button (click)="login()" color="primary" type="submit">Login</button>
+        </form>
         <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button (click)="login()" color="primary">Login</button>
     </mat-card-actions>
 </mat-card>
+</div></div>

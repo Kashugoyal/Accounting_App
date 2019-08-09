@@ -1,3 +1,4 @@
+import { LoginService } from './login.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,10 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'accounting-app';
-  authorized = false;
 
-  isAuthenticated()
-  {
-    return this.authorized;
-  }
+  constructor(private loginService: LoginService)
+  {}
+  
 }

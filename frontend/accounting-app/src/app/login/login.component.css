@@ -1,0 +1,37 @@
+.row
+{
+    display: flex;
+    float: right;
+    margin-top: 10em;
+    margin-right: 20em;
+    background: #4255bd;
+    border-radius: 2%;
+    
+}
+.element
+{
+    padding: 2em 2em 2em 2em;
+}
+
+.element span
+{
+    color: #fff;
+    font-size: 2em;
+    margin: 2em 0em 2em 0em;
+}
+
+.login-card
+{
+    width: 15em;
+    margin-top: 2em;
+}
+
+.login-card mat-card-title
+{
+    font-size: 15px;
+}
+
+.login-card mat-form-field
+{
+    width: 120%;
+}

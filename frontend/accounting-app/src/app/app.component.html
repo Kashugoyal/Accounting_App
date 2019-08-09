@@ -2,8 +2,6 @@
   <span>iLedger</span>
 </mat-toolbar>
 
-<router-outlet *ngIf="isAuthenticated()"></router-outlet>
+<router-outlet *ngIf="loginService.isAuthenticated()"></router-outlet>
 
-<app-login *ngIf="!isAuthenticated()"></app-login>
-
-<mat-toolbar class="bottom"></mat-toolbar>
+<app-login *ngIf="!loginService.isAuthenticated()"></app-login>
