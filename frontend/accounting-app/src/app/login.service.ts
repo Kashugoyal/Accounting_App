@@ -21,7 +21,6 @@ export class LoginService {
 
   isAuthenticated()
   {
-    console.log(this.isAuthorized);
     return this.isAuthorized;
   }
 }

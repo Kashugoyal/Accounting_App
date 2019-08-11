@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate[""];
     }
     else {
+      // alert
       alert("Invalid credentials");
     }
   }

@@ -5,9 +5,12 @@ from UserAccount import UserAccount
 from MasterAccount import MasterAccount
 from db_handler import read_data, write_data
 from unittest import TestCase as TC
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
+
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 account = read_data("akansal")
 # write_data(account)
@@ -28,7 +31,17 @@ def write_data_to_file():
 def add_user():
     account.add_user(**request.args.to_dict())
     response_object = {'status': 'success'}
-    return jsonify(response_object)
+    response = jsonify(response_object)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route('/get_users', methods = ['GET'])
+# @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def get_user_list():
+    response = jsonify(account.get_users())
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 
 @app.route('/user/<id>/add_account', methods = ['POST'])
@@ -83,11 +96,6 @@ def add_user_payment(user_id: str, account_id: str):
 
 
 # account methods
-
-@app.route('/get_users', methods = ['GET'])
-def get_user_list():
-    return jsonify(account.get_users())
-
 
 # class TestCase(TC):
 

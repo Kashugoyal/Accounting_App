@@ -1,4 +1,7 @@
+import { HttpService } from './../http.service';
 import { Component, OnInit } from '@angular/core';
+import {User} from '../app-classes';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-app-dashboard',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http : HttpService) { }
 
-  ngOnInit() {
+  users:any;
+  selected_user:any;
+  ngOnInit()
+  {
+    this.http.get_users()
+      .subscribe(data=> 
+        {
+          this.users = data; 
+          console.log(this.users);
+        });
   }
 
+  onSelect(user)
+  {
+    this.selected_user = user;
+    console.log(this.selected_user);
+  }
 }
